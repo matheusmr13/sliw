@@ -1,0 +1,11 @@
+{
+  "name": "welp",
+  "version": "1.0.0",
+  "description": "Web applications helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
