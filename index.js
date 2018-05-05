@@ -1,6 +1,5 @@
-const { WebClient, ElectronClient } = require('./src/welp-client');
+const i = require('./build');
 
-module.exports = () => {
-	WebClient,
-	ElectronClient
-};
+console.info(Object.keys(i));
+
+module.exports = i;
