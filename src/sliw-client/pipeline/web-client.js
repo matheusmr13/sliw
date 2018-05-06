@@ -59,8 +59,8 @@ export class WebClient {
 			id: 123,
 			type: 'CLIENT'
 		});
-		this.commands = availableCommands.reduce((bonVoyage, command) => ({
-			...bonVoyage,
+		this.commands = availableCommands.reduce((sliw, command) => ({
+			...sliw,
 			[command.command]: (...args) => {
 				const compileCommand = command.execution(...args);
 				setTimeout(() => {
@@ -90,7 +90,7 @@ export class WebClient {
 		});
 
 
-		this.window.Welp = {
+		this.window.Sliw = {
 			executePipeline: () => this.sendStartPipeline()
 		};
 	}

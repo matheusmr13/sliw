@@ -2,17 +2,17 @@ const Log = require('./helpers/log-helper');
 const io = require('socket.io')();
 
 let alreadyConnected = false;
-class Welp {
+class Sliw {
 	static onConnectCallback() {}
 
-	static listenToCommunicators(WelpModule, onConnect) {
+	static listenToCommunicators(SliwModule, onConnect) {
 		this.onConnectCallback = onConnect;
 		this.instances = {};
 		io.listen(8000);
 		io.on('connection', (client) => {
 			client.on('setId', (params) => {
 				const { id, type } = params;
-				const instance = this.instances[id] || new WelpModule();
+				const instance = this.instances[id] || new SliwModule();
 				if (type === 'CLIENT') {
 					instance.setWebClient(client);
 				} else if (type === 'ELECTRON') {
@@ -61,4 +61,4 @@ class Welp {
 	}
 }
 
-module.exports = Welp;
+module.exports = Sliw;

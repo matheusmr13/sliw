@@ -1,4 +1,4 @@
-const { WebClient, ElectronClient } = require('./bon-voyage-client');
+const { WebClient, ElectronClient } = require('./sliw-client');
 
 const modulesToExport = {
 	WebClient,

@@ -1,6 +1,6 @@
 import openSocket from 'socket.io-client';
 
-class WelpElectron {
+class SliwElectron {
 	constructor({
 		electron
 	}) {
@@ -51,4 +51,4 @@ class WelpElectron {
 	}
 }
 
-export default WelpElectron;
+export default SliwElectron;

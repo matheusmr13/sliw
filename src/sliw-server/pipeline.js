@@ -1,24 +1,24 @@
 const FsHelper = require('./helpers/fs-helper');
 const Log = require('./helpers/log-helper');
-const Welp = require('./bon-voyage');
+const Sliw = require('./sliw');
 
 const PipelineRunner = require('./pipeline-runner');
 
 const prepareFolder = () => {
-	if (!FsHelper.existsSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__`)) {
-		FsHelper.mkdirSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__`);
+	if (!FsHelper.existsSync(`${Sliw.config.snapshotsFolder}/__sliw-snapshots__`)) {
+		FsHelper.mkdirSync(`${Sliw.config.snapshotsFolder}/__sliw-snapshots__`);
 	}
 };
 
-class WelpPipeline extends Welp {
+class SliwPipeline extends Sliw {
 	runPipeline(name, pipeline, { resolution }) {
 		return new Promise((resolve) => {
 			const [width, height] = resolution;
 			this.index = 0;
 			this.currentFolder = `${name}--${width}x${height}`;
 
-			if (!FsHelper.existsSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__/${this.currentFolder}`)) {
-				FsHelper.mkdirSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__/${this.currentFolder}`);
+			if (!FsHelper.existsSync(`${Sliw.config.snapshotsFolder}/__sliw-snapshots__/${this.currentFolder}`)) {
+				FsHelper.mkdirSync(`${Sliw.config.snapshotsFolder}/__sliw-snapshots__/${this.currentFolder}`);
 			}
 
 
@@ -41,11 +41,11 @@ class WelpPipeline extends Welp {
 
 	runSpecific(pipelineName) {
 		prepareFolder();
-		const pipeline = Welp.config.pipelines[pipelineName];
+		const pipeline = Sliw.config.pipelines[pipelineName];
 		if (!pipeline) {
 			Log.system(`${pipelineName} is not a valid pipeline.
-      Check your bon-voyage.config.js.
-      Available pipelines: ${Object.keys(Welp.config.pipelines).join(', ')}`, 'error');
+      Check your sliw.config.js.
+      Available pipelines: ${Object.keys(Sliw.config.pipelines).join(', ')}`, 'error');
 
 			return;
 		}
@@ -54,17 +54,17 @@ class WelpPipeline extends Welp {
 		});
 	}
 
-	runWelpPipeline() {
+	runSliwPipeline() {
 		prepareFolder();
 
 		let actualPipeline = Promise.resolve();
 		const pipelineStatus = {};
 
-		Welp.config.resolutions.forEach((resolution) => {
-			Object.keys(Welp.config.pipelines).forEach((pipeline) => {
+		Sliw.config.resolutions.forEach((resolution) => {
+			Object.keys(Sliw.config.pipelines).forEach((pipeline) => {
 				actualPipeline = actualPipeline.then(() => this.runPipeline(
 					pipeline,
-					Welp.config.pipelines[pipeline],
+					Sliw.config.pipelines[pipeline],
 					{ resolution }
 				).then((status) => {
 					pipelineStatus[pipeline] = status;
@@ -82,4 +82,4 @@ class WelpPipeline extends Welp {
 	}
 }
 
-module.exports = WelpPipeline;
+module.exports = SliwPipeline;

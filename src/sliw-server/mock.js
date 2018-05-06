@@ -1,6 +1,6 @@
 const mocks = require('../mocks');
 
-class WelpMock {
+class SliwMock {
 	constructor() {
 		mocks.forEach((obj) => {
 			console.info(obj);
@@ -8,4 +8,4 @@ class WelpMock {
 	}
 }
 
-module.exports = WelpMock;
+module.exports = SliwMock;

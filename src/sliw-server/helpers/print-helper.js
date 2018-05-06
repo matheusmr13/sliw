@@ -1,5 +1,5 @@
 const FsHelper = require('./fs-helper');
-const Welp = require('../bon-voyage');
+const Sliw = require('../sliw');
 const compareImages = require('resemblejs/compareImages');
 
 class PrintHelper {
@@ -21,7 +21,7 @@ class PrintHelper {
 		const removeRegExp = new RegExp('_DIFF.png|_NEW.png');
 		const promises = [];
 		return new Promise((resolve) => {
-			const home = `${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__/`;
+			const home = `${Sliw.config.snapshotsFolder}/__sliw-snapshots__/`;
 			FsHelper.readdir(home, (err, pipelineFolders) => {
 				pipelineFolders.forEach((folder) => {
 					FsHelper.readdir(`${home}/${folder}`, (err2, files) => {

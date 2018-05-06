@@ -1,23 +1,23 @@
-const Welp = require('./bon-voyage');
+const Sliw = require('./sliw');
 const Log = require('./helpers/log-helper');
 const PrintHelper = require('./helpers/print-helper');
-const WelpPipeline = require('./pipeline');
+const SliwPipeline = require('./pipeline');
 const vorpal = require('vorpal')();
 const { spawn } = require('child_process');
 
 // eslint-disable-next-line import/no-dynamic-require
-const bonVoyageConfig = require(`${process.env.PWD}/bon-voyage.config`);
-Welp.config = bonVoyageConfig;
+const sliwConfig = require(`${process.env.PWD}/sliw.config`);
+Sliw.config = sliwConfig;
 
 if (process.env.NOT_WATCH) {
-	Welp.listenToCommunicators(WelpPipeline, () => {
-		Welp.instances['123'].runWelpPipeline().then((status) => {
+	Sliw.listenToCommunicators(SliwPipeline, () => {
+		Sliw.instances['123'].runSliwPipeline().then((status) => {
 			const errors = Object.keys(status)
 				.map(pipeline => status[pipeline])
 				.reduce((steps, actual) => [...steps, ...actual], [])
 				.filter(step => step.status === 'ERROR');
 
-			Welp.instances['123'].electronClient.emit('quit');
+			Sliw.instances['123'].electronClient.emit('quit');
 			setTimeout(() => {
 				if (errors.length) {
 					Log.system(`${errors.length} error found on tests.`, 'ERROR');
@@ -35,12 +35,12 @@ if (process.env.NOT_WATCH) {
 		// console.log(`${data}`);
 	});
 } else {
-	Welp.listenToCommunicators(WelpPipeline);
+	Sliw.listenToCommunicators(SliwPipeline);
 
 	vorpal
 		.command('list', 'List connected Clients')
 		.action(function action(args, callback) {
-			this.log(Welp.instances);
+			this.log(Sliw.instances);
 			callback();
 		});
 
@@ -48,14 +48,14 @@ if (process.env.NOT_WATCH) {
 		.command('execute [pipeline]', 'Execute pipeline')
 		.action(function action(args, cb) {
 			spawn('npm', ['run', 'start']);
-			Welp.onConnectCallback = () => {
-				if (Welp.instances && Welp.instances['123']) {
+			Sliw.onConnectCallback = () => {
+				if (Sliw.instances && Sliw.instances['123']) {
 					if (args.pipeline) {
-						Welp.instances['123'].runSpecific(args.pipeline).then(() => {
+						Sliw.instances['123'].runSpecific(args.pipeline).then(() => {
 							cb();
 						});
 					} else {
-						Welp.instances['123'].runWelpPipeline().then((status) => {
+						Sliw.instances['123'].runSliwPipeline().then((status) => {
 							const errors = Object.keys(status)
 								.map(pipeline => status[pipeline])
 								.reduce((steps, actual) => [...steps, ...actual], [])
@@ -110,6 +110,6 @@ if (process.env.NOT_WATCH) {
 		});
 
 	vorpal
-		.delimiter('Welp$')
+		.delimiter('Sliw$')
 		.show();
 }

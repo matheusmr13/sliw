@@ -2,7 +2,7 @@ const Log = require('./helpers/log-helper');
 const PrintHelper = require('./helpers/print-helper');
 const FsHelper = require('./helpers/fs-helper');
 
-const Welp = require('./bon-voyage');
+const Sliw = require('./sliw');
 
 const click = require('./../pipeline-runners/click');
 const input = require('./../pipeline-runners/input');
@@ -76,7 +76,7 @@ module.exports = class PipelineRunner {
 				});
 			});
 		}));
-		return this.bonVoyageAvailableToPipeline;
+		return this.sliwAvailableToPipeline;
 	}
 
 	registerStatus(message, status, type = 'ASSERT', additionalInfos) {
@@ -91,12 +91,12 @@ module.exports = class PipelineRunner {
 	getSnapshotPath(step, type) {
 		const escapedStep = step.replace(/\/|\.|"|\\|\[|\]|=/g, '').replace(/ /g, '-').toLowerCase();
 		const filename = `${this.snapshotIndex}_${escapedStep}${type ? `_${type}` : ''}.png`;
-		return `${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__/${this.name}/${filename}`;
+		return `${Sliw.config.snapshotsFolder}/__sliw-snapshots__/${this.name}/${filename}`;
 	}
 
-	mountWelpAvailableToPipeline() {
-		this.bonVoyageAvailableToPipeline = availableCommands.reduce((bonVoyage, command) => ({
-			...bonVoyage,
+	mountSliwAvailableToPipeline() {
+		this.sliwAvailableToPipeline = availableCommands.reduce((sliw, command) => ({
+			...sliw,
 			[command.command]: (...args) => {
 				this.commandPromise = this.commandPromise.then(() => new Promise((resolve) => {
 					const compileCommand = command.execution.apply(this, args);
@@ -113,11 +113,11 @@ module.exports = class PipelineRunner {
 						funcArgs: args.filter(arg => typeof arg === 'function').map(funcArg => args.indexOf(funcArg))
 					});
 				}));
-				return this.bonVoyageAvailableToPipeline;
+				return this.sliwAvailableToPipeline;
 			}
 		}), {});
 
-		this.bonVoyageAvailableToPipeline.shouldMatchSnapshot = () => this.shouldMatchSnapshot();
+		this.sliwAvailableToPipeline.shouldMatchSnapshot = () => this.shouldMatchSnapshot();
 	}
 
 	registerPipelineEvents() {
@@ -134,8 +134,8 @@ module.exports = class PipelineRunner {
 	}
 
 	execute() {
-		this.mountWelpAvailableToPipeline();
-		this.pipeline(this.bonVoyageAvailableToPipeline);
+		this.mountSliwAvailableToPipeline();
+		this.pipeline(this.sliwAvailableToPipeline);
 		return this.commandPromise.then(() => Promise.resolve(this.status));
 	}
 };
