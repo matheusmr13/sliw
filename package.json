@@ -1,6 +1,6 @@
 {
   "name": "sliw",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "dependencies": {
     "@babel/core": "^7.0.0-beta.46",
     "@babel/preset-env": "^7.0.0-beta.46",
