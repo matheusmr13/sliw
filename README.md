@@ -3,6 +3,8 @@ Not done. Full toolkit to make sure your electron application is working as expe
 
 ## How to use it
 
+Install it:
+
 ``` npm install sliw```
 
 Add this to your `index.js`:
