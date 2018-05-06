@@ -1,12 +1,12 @@
 const FsHelper = require('./helpers/fs-helper');
 const Log = require('./helpers/log-helper');
-const Welp = require('./welp');
+const Welp = require('./bon-voyage');
 
 const PipelineRunner = require('./pipeline-runner');
 
 const prepareFolder = () => {
-	if (!FsHelper.existsSync(`${Welp.config.snapshotsFolder}/__welp-snapshots__`)) {
-		FsHelper.mkdirSync(`${Welp.config.snapshotsFolder}/__welp-snapshots__`);
+	if (!FsHelper.existsSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__`)) {
+		FsHelper.mkdirSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__`);
 	}
 };
 
@@ -17,8 +17,8 @@ class WelpPipeline extends Welp {
 			this.index = 0;
 			this.currentFolder = `${name}--${width}x${height}`;
 
-			if (!FsHelper.existsSync(`${Welp.config.snapshotsFolder}/__welp-snapshots__/${this.currentFolder}`)) {
-				FsHelper.mkdirSync(`${Welp.config.snapshotsFolder}/__welp-snapshots__/${this.currentFolder}`);
+			if (!FsHelper.existsSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__/${this.currentFolder}`)) {
+				FsHelper.mkdirSync(`${Welp.config.snapshotsFolder}/__bon-voyage-snapshots__/${this.currentFolder}`);
 			}
 
 
@@ -44,7 +44,7 @@ class WelpPipeline extends Welp {
 		const pipeline = Welp.config.pipelines[pipelineName];
 		if (!pipeline) {
 			Log.system(`${pipelineName} is not a valid pipeline.
-      Check your welp.config.js.
+      Check your bon-voyage.config.js.
       Available pipelines: ${Object.keys(Welp.config.pipelines).join(', ')}`, 'error');
 
 			return;

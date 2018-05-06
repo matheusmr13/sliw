@@ -1,4 +1,4 @@
-const { WebClient, ElectronClient } = require('./welp-client');
+const { WebClient, ElectronClient } = require('./bon-voyage-client');
 
 const modulesToExport = {
 	WebClient,

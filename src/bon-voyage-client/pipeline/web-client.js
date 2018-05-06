@@ -59,8 +59,8 @@ export class WebClient {
 			id: 123,
 			type: 'CLIENT'
 		});
-		this.commands = availableCommands.reduce((welp, command) => ({
-			...welp,
+		this.commands = availableCommands.reduce((bonVoyage, command) => ({
+			...bonVoyage,
 			[command.command]: (...args) => {
 				const compileCommand = command.execution(...args);
 				setTimeout(() => {

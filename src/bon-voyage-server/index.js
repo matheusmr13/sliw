@@ -1,4 +1,4 @@
-const Welp = require('./welp');
+const Welp = require('./bon-voyage');
 const Log = require('./helpers/log-helper');
 const PrintHelper = require('./helpers/print-helper');
 const WelpPipeline = require('./pipeline');
@@ -6,8 +6,8 @@ const vorpal = require('vorpal')();
 const { spawn } = require('child_process');
 
 // eslint-disable-next-line import/no-dynamic-require
-const welpConfig = require(`${process.env.PWD}/welp.config`);
-Welp.config = welpConfig;
+const bonVoyageConfig = require(`${process.env.PWD}/bon-voyage.config`);
+Welp.config = bonVoyageConfig;
 
 if (process.env.NOT_WATCH) {
 	Welp.listenToCommunicators(WelpPipeline, () => {
