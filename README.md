@@ -23,7 +23,7 @@ module.exports = sliw => sliw
 	.input('[name="password"]', 'mypassword')
 	.shouldMatchSnapshot()
 	.click('.submit-login')
-	.wait('.OrderList')
+	.wait('.logged-page')
 	.shouldMatchSnapshot();
 ```
 
