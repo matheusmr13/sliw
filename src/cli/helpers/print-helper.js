@@ -1,5 +1,5 @@
 const FsHelper = require('./fs-helper');
-const Sliw = require('../sliw');
+const Sliw = require('../commands/sliw');
 const compareImages = require('resemblejs/compareImages');
 
 class PrintHelper {

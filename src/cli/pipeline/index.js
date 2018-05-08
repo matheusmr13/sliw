@@ -1,6 +1,6 @@
-const FsHelper = require('./helpers/fs-helper');
-const Log = require('./helpers/log-helper');
-const Sliw = require('./sliw');
+const FsHelper = require('./../helpers/fs-helper');
+const Log = require('./../helpers/log-helper');
+const Sliw = require('./../commands/sliw');
 
 const PipelineRunner = require('./pipeline-runner');
 

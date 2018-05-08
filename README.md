@@ -54,3 +54,11 @@ And you are ready to go:
 npm run e2e
 ```
 
+## CLI
+
+#### sliw
+Executes test pipelines described on config ```sliw.config.js```.
+
+#### -p \<pathToPipeline>
+Execute single pipeline default config specifiec on ```sliw.config.js```.
+

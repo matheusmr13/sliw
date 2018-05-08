@@ -1,4 +1,4 @@
-const Log = require('./helpers/log-helper');
+const Log = require('./../helpers/log-helper');
 const io = require('socket.io')();
 
 let alreadyConnected = false;

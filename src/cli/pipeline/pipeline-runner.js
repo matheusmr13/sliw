@@ -1,15 +1,15 @@
-const Log = require('./helpers/log-helper');
-const PrintHelper = require('./helpers/print-helper');
-const FsHelper = require('./helpers/fs-helper');
+const Log = require('./../helpers/log-helper');
+const PrintHelper = require('./../helpers/print-helper');
+const FsHelper = require('./../helpers/fs-helper');
 
-const Sliw = require('./sliw');
+const Sliw = require('./../commands/sliw');
 
-const click = require('./../pipeline-runners/click');
-const input = require('./../pipeline-runners/input');
-const keypress = require('./../pipeline-runners/keypress');
-const open = require('./../pipeline-runners/open');
-const pause = require('./../pipeline-runners/pause');
-const wait = require('./../pipeline-runners/wait');
+const click = require('./../../pipeline-runners/click');
+const input = require('./../../pipeline-runners/input');
+const keypress = require('./../../pipeline-runners/keypress');
+const open = require('./../../pipeline-runners/open');
+const pause = require('./../../pipeline-runners/pause');
+const wait = require('./../../pipeline-runners/wait');
 
 const availableCommands = [
 	click,
