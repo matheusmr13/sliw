@@ -1,5 +1,4 @@
-const commands = require('./commands');
-const execute = commands.default;
+const execute = require('./commands').default;
 const program = require('commander');
 const packageJson = require('./../../package.json');
 
@@ -32,16 +31,26 @@ program
 	.version(packageJson.version);
 
 program
-	.command('last-report')
+	.command('sync')
 	.description('Shows last execution report')
 	.action(() => simpleCommand(() => {
-		console.info('last-report');
+		console.info('simple sync command');
 	}));
 
 program
-	.command('watch')
+	.command('async')
 	.description(`Enters on ${packageJson.name} watch mode`)
 	.action(() => simpleCommand(() => new Promise((resolve) => {
+		console.info('simple async command')
+		setTimeout(resolve, 2000);
+	})));
+
+program
+	.command('*')
+	.description(`Enters on ${packageJson.name} watch mode`)
+	.action(command => simpleCommand(() => new Promise((resolve) => {
+		console.info(`Command "${command}" not found`);
+		program.outputHelp();
 		setTimeout(resolve, 2000);
 	})));
 
@@ -54,6 +63,7 @@ program
 program.parse(process.argv);
 
 promiseToExecute.then(() => {
+	console.info('executing');
 	execute({
 		config: require.resolve(`${process.env.PWD}/${program.config}`),
 		pipelines: program.pipeline,
