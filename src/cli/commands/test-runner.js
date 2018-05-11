@@ -1,8 +1,10 @@
 const Sliw = require('./sliw');
 const Log = require('./../helpers/log-helper');
 const SliwPipeline = require('./../pipeline');
+const { spawn } = require('child_process');
 
 const execute = () => new Promise((resolve) => {
+	console.info('hue');
 	Sliw.listenToCommunicators(SliwPipeline, () => {
 		Sliw.instances['123'].runSliwPipeline().then((status) => {
 			const errors = Object.keys(status)
@@ -21,11 +23,12 @@ const execute = () => new Promise((resolve) => {
 				}
 			}, 1000);
 		});
-	});
-	const startProcess = spawn('npm', ['run', 'start']);
-	startProcess.stdout.on('data', (data) => {
-		// eslint-disable-next-line no-console
-		console.log(`${data}`);
+	}).then(() => {
+		const startProcess = spawn('npm', ['run', 'start']);
+		startProcess.stdout.on('data', (data) => {
+			// eslint-disable-next-line no-console
+			console.log(`${data}`);
+		});
 	});
 });
 

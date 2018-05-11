@@ -1,7 +1,7 @@
 const Sliw = require('./sliw');
 const Log = require('./../helpers/log-helper');
 const PrintHelper = require('./../helpers/print-helper');
-const runTests = require('./test-runner');
+const runTests = require('./test-runner').default;
 
 const { spawn } = require('child_process');
 

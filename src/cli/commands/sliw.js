@@ -27,6 +27,7 @@ class Sliw {
 				}
 			});
 		});
+		return Promise.resolve();
 	}
 
 	constructor() {
