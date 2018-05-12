@@ -51,7 +51,7 @@ const log = (icon, message, options) => {
 
 const logStep = (icon, message, color) => log(icon, message, { color, padding: 3 });
 const logPipe = (icon, message) => log(icon, message, { color: 'white', bgColor: 'blue', padding: 1 });
-const logSys = (message, type) => log(null, message, { color: (type === 'error' ? 'red' : 'blue'), padding: 0 });
+const logSys = (message, type = '') => log(null, message, { color: (type.toLowerCase() === 'error' ? 'red' : 'blue'), padding: 0 });
 
 module.exports = {
 	step: logStep,

@@ -5,10 +5,6 @@ const runTests = require('./test-runner').default;
 
 const { spawn } = require('child_process');
 
-// eslint-disable-next-line import/no-dynamic-require
-const sliwConfig = require(`${process.env.PWD}/sliw.config`);
-Sliw.config = sliwConfig;
-
 const executePipeline = (argsPipeline) => {
 	spawn('npm', ['run', 'start']);
 	Sliw.onConnectCallback = () => {

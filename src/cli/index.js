@@ -47,14 +47,21 @@ program
 	.option('-p, --pipeline <pipeline>', 'Execute specific pipeline to execute', multipleOptionReduces, [])
 	.option('-r, --resolutions <resolution>', 'Execute specific resolutions to execute', multipleOptionReduces, [])
 	.option('-u, --update-snapshots', 'Update snapshots if different from existing ones')
-	.option('-c, --config <pathToConfig>', 'Specify path/to/config.js file', '/sliw.config');
+	.option('-v, --verbose', 'Show all logs')
+	.option('-w, --watch', 'Enters watch mode')
+	.option('-c, --config <pathToConfig>', 'Specify path/to/config.js file');
 
 program.parse(process.argv);
 
 promiseToExecute.then(() => {
 	execute({
-		config: require.resolve(`${process.env.PWD}/${program.config}`),
+		config: program.config,
 		pipelines: program.pipeline,
-		resolutions: program.resolutions
-	});
+		resolutions: program.resolutions,
+		shouldUpdateSnapshots: program.updateSnapshots || false,
+		watch: program.watch || false,
+		verbose: program.verbose || false
+	})
+		.then(exitCode => process.exit(exitCode))
+		.catch(() => process.exit(1));
 }).catch(() => {});
