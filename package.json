@@ -1,6 +1,6 @@
 {
   "name": "sliw",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "dependencies": {
     "chalk": "^2.3.2",
     "commander": "^2.15.1",
