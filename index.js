@@ -1,5 +1,1 @@
-const i = require('./build');
-
-console.info(Object.keys(i));
-
-module.exports = i;
+module.exports = require('./build');

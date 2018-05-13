@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const fs = require('fs');
 
@@ -25,13 +24,8 @@ module.exports = {
 	},
 
 	resolve: {
-		modules: ['node_modules', paths.appNodeModules].concat(
-			process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
-		),
-		extensions: ['.js', '.json'],
-		plugins: [
-			new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
-		],
+		modules: ['node_modules', paths.appNodeModules].concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
+		extensions: ['.js', '.json']
 	},
 
 	module: {
@@ -42,26 +36,26 @@ module.exports = {
 				include: paths.appSrc,
 				loader: require.resolve('babel-loader'),
 				options: {
-					compact: true,
-				},
-			},
-		],
+					compact: true
+				}
+			}
+		]
 	},
 
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
-				comparisons: false,
+				comparisons: false
 			},
 			mangle: {
-				safari10: true,
+				safari10: true
 			},
 			output: {
 				comments: false,
-				ascii_only: true,
+				ascii_only: true
 			},
-			sourceMap: shouldUseSourceMap,
+			sourceMap: shouldUseSourceMap
 		})
-	],
+	]
 };

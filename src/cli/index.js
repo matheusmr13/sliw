@@ -1,4 +1,5 @@
 const execute = require('./commands').default;
+const Log = require('./helpers/log-helper');
 const program = require('commander');
 const packageJson = require('./../../package.json');
 
@@ -39,7 +40,7 @@ program
 	})));
 
 program.on('command:*', () => {
-	console.error('Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
+	Log.system(`Invalid command: ${program.args.join(' ')}\nSee --help for a list of available commands.`, 'ERROR');
 	process.exit(1);
 });
 

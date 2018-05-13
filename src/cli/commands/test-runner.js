@@ -80,7 +80,7 @@ const clientHasConnected = connectedClient => connectedClient.runSliwPipeline()
 	.then(status => processStatus(connectedClient, status));
 
 const chosenPipelines = paramPipelines => Object.keys(Sliw.config.pipelines)
-	.filter(pipelineName => paramPipelines.indexOf(pipelineName))
+	.filter(pipelineName => paramPipelines.indexOf(pipelineName) > -1)
 	.reduce((obj, actual) => ({
 		...obj,
 		[actual]: Sliw.config.pipelines[actual]
@@ -102,21 +102,6 @@ const execute = props => new Promise((resolve, reject) => {
 		const sliwConfig = require(`${process.env.PWD}/${configPath.replace(/^\./, '').replace(/^\//, '')}`);
 
 		Sliw.config = sliwConfig;
-		const pipelinesToExecute = chosenPipelines(pipelines);
-		if (!pipelinesToExecute.length) {
-			Log.system(`You specified ${pipelines.length} to execute, but none of them are specified on your configs.
-				asd`, 'ERROR');
-			process.exit(1);
-		}
-
-		Sliw.config = {
-			...(Sliw.config),
-			shouldUpdateSnapshots,
-			watch,
-			verbose,
-			pipelines: pipelinesToExecute
-		};
-		console.info(Sliw.config);
 	} catch (e) {
 		if (!config) {
 			Log.system(`If -c option is not specified, we assume you're using default config "${configPath}" on project's root dir.`, 'ERROR');
@@ -124,6 +109,28 @@ const execute = props => new Promise((resolve, reject) => {
 		Log.system(`No "${configPath}" config file found.`, 'ERROR');
 		process.exit(1);
 	}
+
+	let pipelinesToExecute = Sliw.config.pipelines;
+	if (pipelines.length) {
+		pipelinesToExecute = chosenPipelines(pipelines);
+		const pipelinesCountToExecute = Object.keys(pipelinesToExecute).length;
+		if (!pipelinesCountToExecute) {
+			Log.system(`You specified ${pipelines.length} (${pipelines.join(', ')}) to execute, but none of them are on your configs.`, 'ERROR');
+			Log.system(`Available commands are: ${Object.keys(Sliw.config.pipelines).join(', ')}`, 'ERROR');
+			process.exit(1);
+		} else if (pipelinesCountToExecute !== pipelines.length) {
+			Log.system(`You specified ${pipelines.length} (${pipelines.join(', ')}) to execute, but only ${pipelinesCountToExecute} are on your configs.`, 'WARNING');
+		}
+	}
+	Log.system(`Executing: ${Object.keys(pipelinesToExecute).join(', ')}`);
+
+	Sliw.config = {
+		...(Sliw.config),
+		shouldUpdateSnapshots,
+		watch,
+		verbose,
+		pipelines: pipelinesToExecute
+	};
 
 	Sliw.listenToCommunicators(SliwPipeline, (client) => {
 		clientHasConnected(client).then(resolve).catch(reject);

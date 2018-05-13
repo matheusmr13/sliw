@@ -17,6 +17,9 @@
     "babel-core": "^7.0.0-0",
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "jest": "20.0.4",
     "react-dev-utils": "^5.0.1",
     "webpack": "3.8.1",
@@ -31,14 +34,14 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
+      "src/**/*.{js}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/src/**/__tests__/**/*.{js}",
+      "<rootDir>/src/**/?(*.)(spec|test).{js}"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
@@ -53,21 +56,13 @@
       "^react-native$": "react-native-web"
     },
     "moduleFileExtensions": [
-      "web.js",
       "js",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node",
-      "mjs"
+      "json"
     ]
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }

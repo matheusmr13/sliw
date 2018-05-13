@@ -5,5 +5,4 @@ const modulesToExport = {
 	ElectronClient
 };
 
-console.info(modulesToExport);
 module.exports = modulesToExport;
