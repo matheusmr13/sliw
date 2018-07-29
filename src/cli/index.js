@@ -1,4 +1,4 @@
-const execute = require('./commands').default;
+const execute = require('./commands/test-runner').default;
 const Log = require('./helpers/log-helper');
 const program = require('commander');
 const packageJson = require('./../../package.json');
